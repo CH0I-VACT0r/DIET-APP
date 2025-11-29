@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'home_tab.dart';
-import 'diet_tab.dart'; // 파일 미리 만들어두세요 (빈 파일이라도)
-import 'shop_tab.dart'; // 파일 미리 만들어두세요
-import 'friend_tab.dart'; // 파일 미리 만들어두세요
+import 'diet_tab.dart'; 
+import 'shop_tab.dart'; 
+import 'friend_tab.dart'; 
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -17,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   // 탭별 화면 리스트
   final List<Widget> _tabs = [
     const HomeTab(),   // 1. 홈 (캐릭터)
-    const DietTab(),   // 2. 식단 (나중에)
+    const DietTab(),   // 2. 식단
     const ShopTab(),   // 3. 상점
     const FriendTab(), // 4. 친구
   ];
@@ -31,7 +31,10 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _tabs[_selectedIndex], // 선택된 화면 보여주기
+      // 선택된 화면 보여주기
+      body: _tabs[_selectedIndex], 
+      
+      // 하단 네비게이션 바
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed, // 탭이 4개 이상일 때 필수
         currentIndex: _selectedIndex,

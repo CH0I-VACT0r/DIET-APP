@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/user_provider.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -8,14 +10,17 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  // 임시 데이터 (나중에 Provider나 Firebase에서 가져올 것)
-  int cookiePoint = 1500;
+  // 건강 상태 데이터 (추후에는 이것도 Firebase나 Provider에서 가져와야 함)
   double healthScore = 40; // 0~100 (낮으면 아픔)
   double diabetesRisk = 0.8; // 당뇨 위험도 (0.0 ~ 1.0)
   double hbpRisk = 0.3; // 고혈압 위험도
 
   @override
   Widget build(BuildContext context) {
+    // ★ [핵심] Provider에 있는 내 정보 가져오기 (이름, 성별, 포인트 등)
+    // context.watch를 쓰면 데이터가 바뀔 때마다 화면이 새로고침 됩니다.
+    final user = context.watch<UserProvider>();
+
     return Scaffold(
       // 상단 앱바 (포인트 표시용)
       appBar: AppBar(
@@ -33,7 +38,11 @@ class _HomeTabState extends State<HomeTab> {
                 children: [
                   const Icon(Icons.cookie, color: Colors.brown, size: 20),
                   const SizedBox(width: 5),
-                  Text("$cookiePoint P", style: const TextStyle(color: Colors.brown, fontWeight: FontWeight.bold)),
+                  // ★ [수정] 내 진짜 포인트 보여주기
+                  Text(
+                    "${user.point} P", 
+                    style: const TextStyle(color: Colors.brown, fontWeight: FontWeight.bold)
+                  ),
                 ],
               ),
             ),
@@ -44,20 +53,30 @@ class _HomeTabState extends State<HomeTab> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // 1. 캐릭터 영역 (건강 상태에 따라 이미지 변경)
+            // 1. 캐릭터 영역
             Expanded(
               flex: 3,
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // 캐릭터 이미지 (임시로 아이콘 사용, 나중에 이미지로 교체)
-                    Icon(
-                      healthScore < 50 ? Icons.sick : Icons.sentiment_satisfied_alt,
-                      size: 150,
-                      color: healthScore < 50 ? Colors.green : Colors.orange,
-                    ),
+                    // ★ [수정] 성별과 건강 상태에 따라 다른 이미지 보여주는 함수 호출
+                    _buildCharacterImage(user.gender, healthScore),
+                    
                     const SizedBox(height: 20),
+                    
+                    // ★ [추가] 이름과 페르소나(유형) 표시
+                    Text(
+                      user.name.isEmpty ? "이름없음" : user.name,
+                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "(${user.persona})", 
+                      style: const TextStyle(fontSize: 16, color: Colors.grey),
+                    ),
+                    
+                    const SizedBox(height: 20),
+                    
                     // 말풍선 (상태 메시지)
                     Container(
                       padding: const EdgeInsets.all(10),
@@ -66,7 +85,7 @@ class _HomeTabState extends State<HomeTab> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
-                        healthScore < 50 ? "배고파요... 밥 좀 줘..." : "오늘 컨디션 최고!",
+                        healthScore < 50 ? "배고파요... 밥 좀 주세요..." : "오늘 컨디션 최고!",
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
@@ -103,7 +122,30 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
-  // 위험도 게이지 바 만드는 함수
+  // ★ [추가] 캐릭터 이미지 분기 처리 함수
+  Widget _buildCharacterImage(String gender, double health) {
+    IconData charIcon;
+    Color color;
+
+    if (health < 50) {
+      // 건강 점수가 낮으면 아픈 아이콘 (성별 무관)
+      charIcon = Icons.sick;
+      color = Colors.green; // 아픈 색깔
+    } else {
+      // 건강하면 성별에 따라 다르게
+      if (gender == 'M') {
+        charIcon = Icons.face; // 남자
+        color = Colors.blue;
+      } else {
+        charIcon = Icons.face_3; // 여자
+        color = Colors.pink;
+      }
+    }
+
+    return Icon(charIcon, size: 150, color: color);
+  }
+
+  // 위험도 게이지 바 만드는 함수 (기존 유지)
   Widget _buildRiskBar(String label, double value, Color color) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
