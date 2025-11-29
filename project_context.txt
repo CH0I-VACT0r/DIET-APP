@@ -1,0 +1,2057 @@
+### [Project Structure] ###
+    assets/
+        data/
+            coupang_data.json
+            food.xlsx
+    lib/
+        providers/
+            user_provider.dart
+        screens/
+            admin_data_screen.dart
+            character_creation_screen.dart
+            diet_tab.dart
+            friend_tab.dart
+            home_tab.dart
+            landing_screen.dart
+            main_screen.dart
+            shop_tab.dart
+            survey_screen.dart
+        firebase_options.dart
+        main.dart
+        product.dart
+        recommendation_page.dart
+        xlToJSON.py
+    README.md
+    analysis_options.yaml
+    extract.dart
+    project_context.txt
+    pubspec.lock
+    pubspec.yaml
+
+### [File Contents] ###
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\analysis_options.yaml ---
+# This file configures the analyzer, which statically analyzes Dart code to
+# check for errors, warnings, and lints.
+#
+# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
+# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
+# invoked from the command line by running `flutter analyze`.
+
+# The following line activates a set of recommended lints for Flutter apps,
+# packages, and plugins designed to encourage good coding practices.
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  # The lint rules applied to this project can be customized in the
+  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
+  # included above or to enable additional rules. A list of all available lints
+  # and their documentation is published at https://dart.dev/lints.
+  #
+  # Instead of disabling a lint rule for the entire project in the
+  # section below, it can also be suppressed for a single line of code
+  # or a specific dart file by using the `// ignore: name_of_lint` and
+  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
+  # producing the lint.
+  rules:
+    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
+    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
+
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\analysis_options.yaml ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\assets\data\coupang_data.json ---
+[
+  {
+    "product_id": "cp_0",
+    "name": "샐러드보울 넉넉소반 12종 세트 프리미엄 직장인 혼밥 도시락, 24개, 8.444kg",
+    "price": 133200,
+    "type": "bulk",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%83%90%EB%9F%AC%EB%93%9C%EB%B3%B4%EC%9A%B8%20%EB%84%89%EB%84%89%EC%86%8C%EB%B0%98%2012%EC%A2%85%20%EC%84%B8%ED%8A%B8%20%ED%94%84%EB%A6%AC%EB%AF%B8%EC%97%84%20%EC%A7%81%EC%9E%A5%EC%9D%B8%20%ED%98%BC%EB%B0%A5%20%EB%8F%84%EC%8B%9C%EB%9D%BD%2C%2024%EA%B0%9C%2C%208.444kg&channel=user",
+    "kcal": 200,
+    "protein": 10,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_1",
+    "name": "셰프애찬 석박지 큼직한 깍두기 무 김치, 1개, 2kg",
+    "price": 37800,
+    "type": "bulk",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%85%B0%ED%94%84%EC%95%A0%EC%B0%AC%20%EC%84%9D%EB%B0%95%EC%A7%80%20%ED%81%BC%EC%A7%81%ED%95%9C%20%EA%B9%8D%EB%91%90%EA%B8%B0%20%EB%AC%B4%20%EA%B9%80%EC%B9%98%2C%201%EA%B0%9C%2C%202kg&channel=user",
+    "kcal": 200,
+    "protein": 10,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_2",
+    "name": "집밥연구소 한번결제로 한달 4주 주1회 정기배송 기본세트 반찬세트 부모님 선물 가정식 수제 반찬 간편 정기식단, 1세트, 5kg",
+    "price": 199000,
+    "type": "bulk",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%A7%91%EB%B0%A5%EC%97%B0%EA%B5%AC%EC%86%8C%20%ED%95%9C%EB%B2%88%EA%B2%B0%EC%A0%9C%EB%A1%9C%20%ED%95%9C%EB%8B%AC%204%EC%A3%BC%20%EC%A3%BC1%ED%9A%8C%20%EC%A0%95%EA%B8%B0%EB%B0%B0%EC%86%A1%20%EA%B8%B0%EB%B3%B8%EC%84%B8%ED%8A%B8%20%EB%B0%98%EC%B0%AC%EC%84%B8%ED%8A%B8%20%EB%B6%80%EB%AA%A8%EB%8B%98%20%EC%84%A0%EB%AC%BC%20%EA%B0%80%EC%A0%95%EC%8B%9D%20%EC%88%98%EC%A0%9C%20%EB%B0%98%EC%B0%AC%20%EA%B0%84%ED%8E%B8%20%EC%A0%95%EA%B8%B0%EC%8B%9D%EB%8B%A8%2C%201%EC%84%B8%ED%8A%B8%2C%205kg&channel=user",
+    "kcal": 200,
+    "protein": 10,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_3",
+    "name": "[손질 마늘]깐마늘 알마늘 작은마늘 500g 내외, 1개",
+    "price": 0,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%5B%EC%86%90%EC%A7%88%20%EB%A7%88%EB%8A%98%5D%EA%B9%90%EB%A7%88%EB%8A%98%20%EC%95%8C%EB%A7%88%EB%8A%98%20%EC%9E%91%EC%9D%80%EB%A7%88%EB%8A%98%20500g%20%EB%82%B4%EC%99%B8%2C%201%EA%B0%9C&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_4",
+    "name": "애슐리 볶음밥 10인분 혼합 구성 10종(통새우+갈릭스테이크+버터와규+깍두기베이컨+케이준+랍스터+해물+묵은지삼겹+잡채+스크램블게살)아침 대용 직장인 도시락, 2320g, 1세트",
+    "price": 34500,
+    "type": "meal_kit",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%95%A0%EC%8A%90%EB%A6%AC%20%EB%B/B6%8C%EC%9D%8C%EB%B0%A5%2010%EC%9D%B8%EB%B6%84%20%ED%98%BC%ED%95%A9%20%EA%B5%AC%EC%84%B1%2010%EC%A2%85%28%ED%86%B5%EC%83%88%EC%9A%B0%2B%EA%B0%88%EB%A6%AD%EC%8A%A4%ED%85%8C%EC%9D%B4%ED%81%AC%2B%EB%B/B4%ED%84%B0%EC%99%80%EA%B7%9C%2B%EA%B9%8D%EB%91%90%EA%B8%B0%EB%B2%A0%EC%9D%B4%EC%BB%A8%2B%EC%BC%80%EC%9D%B4%EC%A4%80%2B%EB%9E%8D%EC%8A%A4%ED%84%B0%2B%ED%95%B4%EB%AC%BC%2B%EB%AC%B5%EC%9D%80%EC%A7%80%EC%82%BC%EA%B2%B9%2B%EC%9E%A1%EC%B1%84%2B%EC%8A%A4%ED%81%AC%EB%9E%A8%EB%B8%94%EA%B2%8C%EC%82%B4%29%EC%95%84%EC%B9%A8%20%EB%8C%80%EC%9A%A9%20%EC%A7%81%EC%9E%A5%EC%9D%B8%20%EB%8F%84%EC%8B%9C%EB%9D%BD%2C%202320g%2C%201%EC%84%B8%ED%8A%B8&channel=user",
+    "kcal": 600,
+    "protein": 25,
+    "cooking_time": 15,
+    "difficulty": 1
+  },
+  {
+    "product_id": "cp_5",
+    "name": "[손질 진공포장]찌개용 모둠 야채 200g 내외 3팩 (감자 양파 애호박 청양고추), 3개",
+    "price": 0,
+    "type": "meal_kit",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%5B%EC%86%90%EC%A7%88%20%EC%A7%84%EA%B3%B5%ED%8F%AC%EC%9E%A5%5D%EC%B0%8C%EA%B0%9C%EC%9A%A9%20%EB%AA%A8%EB%91%A0%20%EC%95%BC%EC%B1%84%20200g%20%EB%82%B4%EC%99%B8%203%ED%8C%A9%20%28%EA%B0%90%EC%9E%90%20%EC%96%91%ED%8C%8C%20%EC%95%A0%ED%98%B8%EB%B0%95%20%EC%B2%AD%EC%96%91%EA%B3%A0%EC%B6%94%29%2C%203%EA%B0%9C&channel=user",
+    "kcal": 600,
+    "protein": 25,
+    "cooking_time": 15,
+    "difficulty": 1
+  },
+  {
+    "product_id": "cp_6",
+    "name": "오프라이스 한촌설렁탕 정통 설렁탕, 500g, 10개",
+    "price": 49800,
+    "type": "meal_kit",
+    "image_url": "https://image.coupangcdn.com/image/rds/delivery_badge_ext/badge_199559e56f7.png",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%98%A4%ED%94%84%EB%9D%BC%EC%9D%B4%EC%8A%A4%20%ED%95%9C%EC%B4%8C%EC%84%A4%EB%A0%81%ED%83%95%20%EC%A0%95%ED%86%B5%20%EC%84%A4%EB%A0%81%ED%83%95%2C%20500g%2C%2010%EA%B0%9C&channel=user",
+    "kcal": 600,
+    "protein": 25,
+    "cooking_time": 15,
+    "difficulty": 1
+  },
+  {
+    "product_id": "cp_7",
+    "name": "DWD 110V/220V 밥솥 1.8L 음식 히터 죽 요리 수프 냄비 아침 메이커 프라이팬, 02 110V, 01 White e",
+    "price": 0,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=DWD%20110V%2F220V%20%EB%B0%A5%EC%86%A5%201.8L%20%EC%9D%8C%EC%8B%9D%20%ED%9E%88%ED%84%B0%20%EC%A3%BD%20%EC%9A%94%EB%A6%AC%20%EC%88%98%ED%94%84%20%EB%83%84%EB%B9%84%20%EC%95%84%EC%B9%A8%20%EB%A9%94%EC%9D%B4%EC%BB%A4%20%ED%94%84%EB%9D%BC%EC%9D%B4%ED%8C%AC%2C%2002%20110V%2C%2001%20White%20e&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_8",
+    "name": "햇반 현미귀리곤약밥 150g 60개",
+    "price": 0,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%ED%96%87%EB%B0%98%20%ED%98%84%EB%AF%B8%EA%B7%80%EB%A6%AC%EA%B3%A4%EC%95%BD%EB%B0%A5%20150g%2060%EA%B0%9C&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_9",
+    "name": "[소래포구 개성상회] 무꼬들이, 1개, 500g",
+    "price": 0,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%5B%EC%86%8C%EB%9E%98%ED%8F%AC%EA%B5%AC%20%EA%B0%9C%EC%84%B1%EC%83%81%ED%9A%8C%5D%20%EB%AC%B4%EA%BC%AC%EB%93%A4%EC%9D%B4%2C%201%EA%B0%9C%2C%20500g&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_10",
+    "name": "오뚜기 컵밥 10종 뚝배기 불고기 참기름 김치볶음밥 김치참치 미역국밥 진짬뽕밥 김치알밥 제육덮밥 오삼불고기 참치마요 돌솥비빔밥, 1개",
+    "price": 0,
+    "type": "meal_kit",
+    "image_url": "https://image.coupangcdn.com/image/rds/delivery_badge_ext/badge_199559e56f7.png",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%98%A4%EB%9A%9C%EA%B8%B0%20%EC%BB%B5%EB%B0%A5%2010%EC%A2%85%20%EB%9A%9D%EB%B0%B0%EA%B8%B0%20%EB%B6%88%EA%B3%A0%EA%B8%B0%20%EC%B0%B8%EA%B8%B0%EB%A6%84%20%EA%B9%80%EC%B9%98%EB%B6%8C%EC%9D%8C%EB%B0%A5%20%EA%B9%80%EC%B9%98%EC%B0%B8%EC%B9%98%20%EB%AF%B8%EC%97%AD%EA%B5%AD%EB%B0%A5%20%EC%A7%84%EC%A7%AC%EB%BD%95%EB%B0%A5%20%EA%B9%80%EC%B9%98%EC%95%8C%EB%B0%A5%20%EC%A0%9C%EC%9C%A1%EB%8D%AE%EB%B0%A5%20%EC%98%A4%EC%82%BC%EB%B6%88%EA%B3%A0%EA%B8%B0%20%EC%B0%B8%EC%B9%98%EB%A7%88%EC%9A%94%20%EB%8F%8C%EC%86%A5%EB%B9%84%EB%B9%94%EB%B0%A5%2C%201%EA%B0%9C&channel=user",
+    "kcal": 600,
+    "protein": 25,
+    "cooking_time": 15,
+    "difficulty": 1
+  },
+  {
+    "product_id": "cp_11",
+    "name": "몽드프룻 1인가구과일 요즘제철과일 과일랜덤박스 제철 혼합과일 소량 소분 캠핑과일 과일박스 [라지], 1개",
+    "price": 67200,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EB%AA%BD%EB%93%9C%ED%94%84%EB%A3%BB%201%EC%9D%B8%EA%B0%80%EA%B5%AC%EA%B3%BC%EC%9D%BC%20%EC%9A%94%EC%A6%98%EC%A0%9C%EC%B2%A0%EA%B3%BC%EC%9D%BC%20%EA%B3%BC%EC%9D%BC%EB%9E%9C%EB%8D%A4%EB%B0%95%EC%8A%A4%20%EC%A0%9C%EC%B2%A0%20%ED%98%BC%ED%95%A9%EA%B3%BC%EC%9D%BC%20%EC%86%8C%EB%9F%89%20%EC%86%8C%EB%B6%84%20%EC%BA%A0%ED%95%91%EA%B3%BC%EC%9D%BC%20%EA%B3%BC%EC%9D%BC%EB%B0%95%EC%8A%A4%20%5B%EB%9D%BC%EC%A7%80%5D%2C%201%EA%B0%9C&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_12",
+    "name": "엠에스푸드 황태해장국 1박스(600g x 25개), 25개, 600g",
+    "price": 132000,
+    "type": "meal_kit",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%97%A0%EC%97%90%EC%8A%A4%ED%91%B8%EB%93%9C%20%ED%99%A9%ED%83%9C%ED%95%B4%EC%9E%A5%EA%B5%AD%201%EB%B0%95%EC%8A%A4%28600g%20x%2025%EA%B0%9C%29%2C%2025%EA%B0%9C%2C%20600g&channel=user",
+    "kcal": 600,
+    "protein": 25,
+    "cooking_time": 15,
+    "difficulty": 1
+  },
+  {
+    "product_id": "cp_13",
+    "name": "[딸기&키위 블렌딩] 휴대하기 간편한 스틱형 스테비아 콤부차, 5g, 1박스, 30개입",
+    "price": 0,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%5B%EB%94%B8%EA%B8%B0%26%ED%82%A4%EC%9C%84%20%EB%B8%94%EB%A0%8C%EB%94%A9%5D%20%ED%9C%B4%EB%8C%80%ED%95%98%EA%B8%B0%20%EA%B0%84%ED%8E%B8%ED%95%9C%20%EC%8A%A4%ED%8B%B1%ED%98%95%20%EC%8A%A4%ED%85%8C%EB%B9%84%EC%95%84%20%EC%BD%A4%EB%B6%80%EC%B0%A8%2C%205g%2C%201%EB%B0%95%EC%8A%A4%2C%2030%EA%B0%9C%EC%9E%85&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_14",
+    "name": "양념세트 조미료 양념 요리 캠핑, 1개",
+    "price": 34900,
+    "type": "bulk",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%96%91%EB%85%90%EC%84%B8%ED%8A%B8%20%EC%A1%B0%EB%AF%B8%EB%A3%8C%20%EC%96%91%EB%85%90%20%EC%9A%94%EB%A6%AC%20%EC%BA%A0%ED%95%91%2C%201%EA%B0%9C&channel=user",
+    "kcal": 200,
+    "protein": 10,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_15",
+    "name": "빠르고 간편하게 쌀과 제주 나물을 한 캔에 담은 잇더밀 제주 고사리 나물 밥 한끼 (2인기준) 실온보관 휴대용이, 5개, 200g",
+    "price": 75000,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EB%B9%A0%EB%A5%B4%EA%B3%A0%20%EA%B0%84%ED%8E%B8%ED%95%98%EA%B2%8C%20%EC%8C%80%EA%B3%BC%20%EC%A0%9C%EC%A3%BC%20%EB%82%98%EB%AC%BC%EC%9D%84%20%ED%95%9C%20%EC%BA%94%EC%97%90%20%EB%8B%B4%EC%9D%80%20%EC%9E%87%EB%8D%94%EB%B0%80%20%EC%A0%9C%EC%A3%BC%20%EA%B3%A0%EC%82%AC%EB%A6%AC%20%EB%82%98%EB%AC%BC%20%EB%B0%A5%20%ED%95%9C%EB%81%BC%20%282%EC%9D%B8%EA%B8%B0%EC%A4%80%29%20%EC%8B%A4%EC%98%A8%EB%B3%B4%EA%B4%80%20%ED%9C%B4%EB%8C%80%EC%9A%A9%EC%9D%B4%2C%205%EA%B0%9C%2C%20200g&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_16",
+    "name": "셰프애찬 꽁보리김치 얼갈이 물김치 김치, 1개, 1kg",
+    "price": 25900,
+    "type": "bulk",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%85%B0%ED%94%84%EC%95%A0%EC%B0%AC%20%EA%BD%A9%EB%B3%B4%EB%A6%AC%EA%B9%80%EC%B9%98%20%EC%96%BC%EA%B0%88%EC%9D%B4%20%EB%AC%BC%EA%B9%80%EC%B9%98%20%EA%B9%80%EC%B9%98%2C%201%EA%B0%9C%2C%201kg&channel=user",
+    "kcal": 200,
+    "protein": 10,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_17",
+    "name": "물레방아반찬 북어 미역국 500g, 1개",
+    "price": 0,
+    "type": "meal_kit",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EB%AC%BC%EB%A0%88%EB%B0%A9%EC%95%84%EB%B0%98%EC%B0%AC%20%EB%B6%81%EC%96%B4%20%EB%AF%B8%EC%97%AD%EA%B5%AD%20500g%2C%201%EA%B0%9C&channel=user",
+    "kcal": 600,
+    "protein": 25,
+    "cooking_time": 15,
+    "difficulty": 1
+  },
+  {
+    "product_id": "cp_18",
+    "name": "[한끼채]깐양파 진공 1팩1kg 1인 한끼채소, 1개",
+    "price": 12000,
+    "type": "bulk",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%5B%ED%95%9C%EB%81%BC%EC%B1%84%5D%EA%B9%90%EC%96%91%ED%8C%8C%20%EC%A7%84%EA%B3%B5%201%ED%8C%A91kg%201%EC%9D%B8%20%ED%95%9C%EB%81%BC%EC%B1%84%EC%86%8C%2C%201%EA%B0%9C&channel=user",
+    "kcal": 200,
+    "protein": 10,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_19",
+    "name": "폰타나 피에몬테 그릴드 머쉬룸 크림 컵수프, 60g, 48개",
+    "price": 0,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%ED%8F%B0%ED%83%80%EB%82%98%20%ED%94%BC%EC%97%90%EB%AA%AC%ED%85%8C%20%EA%B7%B8%EB%A6%B4%EB%93%9C%20%EB%A8%B8%EC%89%AC%EB%A3%B8%20%ED%81%AC%EB%A6%BC%20%EC%BB%B5%EC%88%98%ED%94%84%2C%2060g%2C%2048%EA%B0%9C&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_20",
+    "name": "애슐리 주먹밥 4종 세트 20개입(김치콘치즈+버터와규+치즈갈릭스테이크+치즈케이준치킨) 삼각김밥 / 냉동김밥, 1개",
+    "price": 32810,
+    "type": "bulk",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%95%A0%EC%8A%90%EB%A6%AC%20%EC%A3%BC%EB%A8%B9%EB%B0%A5%204%EC%A2%85%20%EC%84%B8%ED%8A%B8%2020%EA%B0%9C%EC%9E%85%28%EA%B9%80%EC%B9%98%EC%BD%98%EC%B9%98%EC%A6%88%2B%EB%B2%84%ED%84%B0%EC%99%80%EA%B7%9C%2B%EC%B9%98%EC%A6%88%EA%B0%88%EB%A6%AD%EC%8A%A4%ED%85%8C%EC%9D%B4%ED%81%AC%2B%EC%B9%98%EC%A6%88%EC%BC%80%EC%9D%B4%EC%A4%80%EC%B9%98%ED%82%A8%29%20%EC%82%BC%EA%B0%81%EA%B9%80%EB%B0%A5%20%2F%20%EB%83%89%EB%8F%99%EA%B9%80%EB%B0%A5%2C%201%EA%B0%9C&channel=user",
+    "kcal": 200,
+    "protein": 10,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_21",
+    "name": "[기장식품에서만] **특별세일** 햇기장간편미역 20g*8봉, 8개",
+    "price": 15500,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%5B%EA%B8%B0%EC%9E%A5%EC%8B%9D%ED%92%88%EC%97%90%EC%84%9C%EB%A7%8C%5D%20%2A%2A%ED%8A%B9%EB%B3%84%EC%84%B8%EC%9D%BC%2A%2A%20%ED%96%87%EA%B8%B0%EC%9E%A5%EA%B0%84%ED%8E%B8%EB%AF%B8%EC%97%AD%2020g%2A8%EB%B4%89%2C%208%EA%B0%9C&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_22",
+    "name": "엠에스푸드 소내장탕 600g 1박스 25개입, 25개",
+    "price": 138200,
+    "type": "meal_kit",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%97%A0%EC%97%90%EC%8A%A4%ED%91%B8%EB%93%9C%20%EC%86%8C%EB%82%B4%EC%9E%A5%ED%83%95%20600g%201%EB%B0%95%EC%8A%A4%2025%EA%B0%9C%EC%9E%85%2C%2025%EA%B0%9C&channel=user",
+    "kcal": 600,
+    "protein": 25,
+    "cooking_time": 15,
+    "difficulty": 1
+  },
+  {
+    "product_id": "cp_23",
+    "name": "한촌 설렁탕집 소고기무국, 20개, 500g",
+    "price": 89800,
+    "type": "meal_kit",
+    "image_url": "https://image.coupangcdn.com/image/rds/delivery_badge_ext/badge_1998ab96bf7.png",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%ED%95%9C%EC%B4%8C%20%EC%84%A4%EB%A0%81%ED%83%95%EC%A7%91%20%EC%86%8C%EA%B3%A0%EA%B8%B0%EB%AC%B4%EA%B5%AD%2C%2020%EA%B0%9C%2C%20500g&channel=user",
+    "kcal": 600,
+    "protein": 25,
+    "cooking_time": 15,
+    "difficulty": 1
+  },
+  {
+    "product_id": "cp_24",
+    "name": "1인가구 캠핑용 프리미엄 1+ 한돈 부위별 구이용 300g 7종, 앞다리, 1개",
+    "price": 0,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=1%EC%9D%B8%EA%B0%80%EA%B5%AC%20%EC%BA%A0%ED%95%91%EC%9A%A9%20%ED%94%84%EB%A6%AC%EB%AF%B8%EC%97%84%201%2B%20%ED%95%9C%EB%8F%88%20%EB%B6%80%EC%9C%84%EB%B3%84%20%EA%B5%AC%EC%9D%B4%EC%9A%A9%20300g%207%EC%A2%85%2C%20%EC%95%9E%EB%8B%A4%EB%A6%AC%2C%201%EA%B0%9C&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_25",
+    "name": "굳지않는떡 예향떡 한입방울떡, 2개, 1kg",
+    "price": 0,
+    "type": "bulk",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EA%B5%B9%EC%A7%80%EC%95%8A%EB%8A%94%EB%96%A1%20%EC%98%88%ED%96%A5%EB%96%A1%20%ED%95%9C%EC%9E%85%EB%B0%A9%EC%9A%B8%EB%96%A1%2C%202%EA%B0%9C%2C%201kg&channel=user",
+    "kcal": 200,
+    "protein": 10,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_26",
+    "name": "[육수간] 한입 큐브 목살(250g), 1개, 250g",
+    "price": 10900,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%5B%EC%9C%A1%EC%88%98%EA%B0%84%5D%20%ED%95%9C%EC%9E%85%20%ED%81%90%EB%B8%8C%20%EB%AA%A9%EC%82%B4%28250g%29%2C%201%EA%B0%9C%2C%20250g&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_27",
+    "name": "밥솥에 부어만주세요. 쌀과 건강나물의 만남 잇더밀 _곤드레 취나물 유채나물 표고버섯과무 고사리 나물 밥 한끼, 1세트, 1.02kg",
+    "price": 53600,
+    "type": "bulk",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EB%B0%A5%EC%86%A5%EC%97%90%20%EB%B6%80%EC%96%B4%EB%A7%8C%EC%A3%BC%EC%84%B8%EC%9A%94.%20%EC%8C%80%EA%B3%BC%20%EA%B1%B4%EA%B0%95%EB%82%98%EB%AC%BC%EC%9D%98%20%EB%A7%8C%EB%82%A8%20%EC%9E%87%EB%8D%94%EB%B0%80%20_%EA%B3%A4%EB%93%9C%EB%A0%88%20%EC%B7%A8%EB%82%98%EB%AC%BC%20%EC%9C%A0%EC%B1%84%EB%82%98%EB%AC%BC%20%ED%91%9C%EA%B3%A0%EB%B2%84%EC%84%AF%EA%B3%BC%EB%AC%B4%20%EA%B3%A0%EC%82%AC%EB%A6%AC%20%EB%82%98%EB%AC%BC%20%EB%B0%A5%20%ED%95%9C%EB%81%BC%2C%201%EC%84%B8%ED%8A%B8%2C%201.02kg&channel=user",
+    "kcal": 200,
+    "protein": 10,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_28",
+    "name": "셰프애찬 박셰프 찐밥도둑 새꼬막무침 양념 꼬막 비빔밥, 250g/캔, 1개, 250g",
+    "price": 0,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%85%B0%ED%94%84%EC%95%A0%EC%B0%AC%20%EB%B0%95%EC%85%B0%ED%94%84%20%EC%B0%90%EB%B0%A5%EB%8F%84%EB%91%91%20%EC%83%88%EA%BC%AC%EB%A7%89%EB%AC%B4%EC%B9%A8%20%EC%96%91%EB%85%90%20%EA%BC%AC%EB%A7%89%20%EB%B9%84%EB%B9%94%EB%B0%A5%2C%20250g%2F%EC%BA%94%2C%201%EA%B0%9C%2C%20250g&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_29",
+    "name": "삼겹살 대패 냉동 삼겹살 편리한 얇은삼겹살 녹이지 않아도 바로 먹을 수 있는 대패 삼겹살1kg, 3개, 1kg",
+    "price": 68400,
+    "type": "bulk",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%82%BC%EA%B2%B9%EC%82%B4%20%EB%8C%80%ED%8C%A8%20%EB%83%89%EB%8F%99%20%EC%82%BC%EA%B2%B9%EC%82%B4%20%ED%8E%B8%EB%A6%AC%ED%95%9C%20%EC%98%87%EC%9D%80%EC%82%BC%EA%B2%B9%EC%82%B4%20%EB%85%B9%EC%9D%B4%EC%A7%80%20%EC%95%8A%EC%95%84%EB%8F%84%20%EB%B0%94%EB%A1%9C%20%EB%A8%B9%EC%9D%84%20%EC%88%98%20%EC%9E%88%EB%8A%94%20%EB%8C%80%ED%8C%A8%20%EC%82%BC%EA%B2%B9%EC%82%B41kg%2C%203%EA%B0%9C%2C%201kg&channel=user",
+    "kcal": 200,
+    "protein": 10,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_30",
+    "name": "리얼밀 볶은 렌틸콩 200g 콩볶음 스낵, 볶은렌틸콩 200g, 1개",
+    "price": 0,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EB%A6%AC%EC%96%BC%EB%B0%80%20%EB%B/B6%8C%EC%9D%80%20%EB%A0%8C%ED%8B%B8%EC%BD%A9%20200g%20%EC%BD%A9%EB%B/B6%8C%EC%9D%8C%20%EC%8A%A4%EB%82%B5%2C%20%EB%B/B6%8C%EC%9D%8C%EB%A0%8C%ED%8B%B8%EC%BD%A9%20200g%2C%201%EA%B0%9C&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_31",
+    "name": "오이도강경젓갈 고들빼기무침, 1개, 500g",
+    "price": 13000,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%98%A4%EC%9D%B4%EB%8F%84%EA%B0%95%EA%B2%BD%EC%A0%93%EA%B0%88%20%EA%B3%A0%EB%93%A4%EB%B9%BC%EA%B8%B0%EB%AC%B4%EC%B9%A8%2C%201%EA%B0%9C%2C%20500g&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_32",
+    "name": "풀무원 사골떡국, 14개, 329g",
+    "price": 125200,
+    "type": "meal_kit",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%ED%92%80%EB%AC%B4%EC%9B%90%20%EC%82%AC%EA%B3%A8%EB%96%A1%EA%B5%AD%2C%2014%EA%B0%9C%2C%20329g&channel=user",
+    "kcal": 600,
+    "protein": 25,
+    "cooking_time": 15,
+    "difficulty": 1
+  },
+  {
+    "product_id": "cp_33",
+    "name": "[손질 진공포장]된장찌개용 모둠야채 200g 내외 1팩 (감자 양파 애호박 청양고추), 1개",
+    "price": 3800,
+    "type": "meal_kit",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%5B%EC%86%90%EC%A7%88%20%EC%A7%84%EA%B3%B5%ED%8F%AC%EC%9E%A5%5D%EB%90%9C%EC%9E%A5%EC%B0%8C%EA%B0%9C%EC%9A%A9%20%EB%AA%A8%EB%91%A0%EC%95%BC%EC%B1%84%20200g%20%EB%82%B4%EC%99%B8%201%ED%8C%A9%20%28%EA%B0%90%EC%9E%90%20%EC%96%91%ED%8C%8C%20%EC%95%A0%ED%98%B8%EB%B0%95%20%EC%B2%AD%EC%96%91%EA%B3%A0%EC%B6%94%29%2C%201%EA%B0%9C&channel=user",
+    "kcal": 600,
+    "protein": 25,
+    "cooking_time": 15,
+    "difficulty": 1
+  },
+  {
+    "product_id": "cp_34",
+    "name": "나물반찬 가정용반찬 데침고구마순1kg, 1개, 1kg",
+    "price": 5500,
+    "type": "bulk",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EB%82%98%EB%AC%BC%EB%B0%98%EC%B0%AC%20%EA%B0%80%EC%A0%95%EC%9A%A9%EB%B0%98%EC%B0%AC%20%EB%8D%B0%EC%B9%A8%EA%B3%A0%EA%B5%AC%EB%A7%88%EC%88%9C1kg%2C%201%EA%B0%9C%2C%201kg&channel=user",
+    "kcal": 200,
+    "protein": 10,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_35",
+    "name": "시골 올리브&칼슘 김자반, 70g, 2개",
+    "price": 0,
+    "type": "ingredient",
+    "image_url": "https://image.coupangcdn.com/image/rds/delivery_badge_ext/badge_1998ab96bf7.png",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%8B%9C%EA%B3%A8%20%EC%98%AC%EB%A6%AC%EB%B8%8C%26%EC%B9%BC%EC%8A%98%20%EA%B9%80%EC%9E%90%EB%B0%98%2C%2070g%2C%202%EA%B0%9C&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  },
+  {
+    "product_id": "cp_36",
+    "name": "컵과일",
+    "price": 0,
+    "type": "ingredient",
+    "image_url": "https://via.placeholder.com/150",
+    "purchase_url": "https://www.coupang.com/np/search?component=&q=%EC%BB%B5%EA%B3%BC%EC%9D%BC&channel=user",
+    "kcal": 100,
+    "protein": 5,
+    "cooking_time": 30,
+    "difficulty": 3
+  }
+]
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\assets\data\coupang_data.json ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\extract.dart ---
+import 'dart:io';
+
+// 설정: 내용을 추출할 파일 확장자 및 제외할 폴더
+const Set<String> allowedExtensions = {'.dart', '.yaml', '.json', '.xml', '.gradle'};
+const Set<String> ignoreDirs = {'.git', '.idea', '.dart_tool', 'build', 'android', 'ios', 'web', 'linux', 'macos', 'windows', 'test'};
+
+void main() async {
+  final currentDir = Directory.current;
+  final outputFile = File('project_context.txt');
+  
+  print('Extracting project from: ${currentDir.path}');
+  
+  final buffer = StringBuffer();
+  
+  // 1. 트리 구조 생성
+  buffer.writeln('### [Project Structure] ###');
+  await _generateTree(currentDir, buffer, currentDir.path);
+  buffer.writeln();
+  
+  // 2. 파일 내용 추출
+  buffer.writeln('### [File Contents] ###');
+  await _extractContents(currentDir, buffer); // 여기서 buffer를 전달함
+  
+  // 3. 파일 저장
+  await outputFile.writeAsString(buffer.toString());
+  
+  print('Done! All data saved to "project_context.txt"');
+  print('Please upload this file to the AI.');
+}
+
+Future<void> _generateTree(Directory dir, StringBuffer buffer, String rootPath) async {
+  final List<FileSystemEntity> entities = await dir.list().toList();
+  
+  // 폴더 우선, 그 다음 파일 순으로 정렬
+  entities.sort((a, b) {
+    if (a is Directory && b is File) return -1;
+    if (a is File && b is Directory) return 1;
+    return a.path.compareTo(b.path);
+  });
+
+  for (var entity in entities) {
+    final name = entity.uri.pathSegments.where((e) => e.isNotEmpty).last;
+    
+    // 제외 폴더 건너뛰기
+    if (entity is Directory && ignoreDirs.contains(name)) continue;
+    if (name.startsWith('.')) continue; // 숨김 파일 건너뛰기
+
+    final relativePath = entity.path.replaceFirst(rootPath, '');
+    // 들여쓰기 계산
+    final level = relativePath.split(Platform.pathSeparator).length - 1;
+    final indent = '    ' * level;
+    
+    if (entity is Directory) {
+      buffer.writeln('$indent$name/');
+      await _generateTree(entity, buffer, rootPath);
+    } else {
+      buffer.writeln('$indent$name');
+    }
+  }
+}
+
+// [수정됨] StringBuffer buffer 매개변수 추가
+Future<void> _extractContents(Directory dir, StringBuffer buffer) async {
+  final List<FileSystemEntity> entities = await dir.list().toList();
+  
+  for (var entity in entities) {
+    final name = entity.uri.pathSegments.where((e) => e.isNotEmpty).last;
+    
+    if (entity is Directory) {
+      if (ignoreDirs.contains(name)) continue;
+      if (name.startsWith('.')) continue;
+      // 재귀 호출 시에도 buffer 전달
+      await _extractContents(entity, buffer);
+    } else if (entity is File) {
+      // 확장자 확인
+      bool isAllowed = false;
+      for (var ext in allowedExtensions) {
+        if (name.endsWith(ext)) {
+          isAllowed = true;
+          break;
+        }
+      }
+      
+      if (isAllowed) {
+        try {
+          final content = await entity.readAsString();
+          buffer.writeln('\n--- START OF FILE: ${entity.path} ---');
+          buffer.writeln(content);
+          buffer.writeln('--- END OF FILE: ${entity.path} ---\n');
+        } catch (e) {
+          // 바이너리 파일이나 읽기 오류는 무시
+        }
+      }
+    }
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\extract.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\firebase_options.dart ---
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart' show defaultTargetPlatform, TargetPlatform, kIsWeb;
+
+class DefaultFirebaseOptions {
+  static FirebaseOptions get currentPlatform {
+    if (kIsWeb || defaultTargetPlatform == TargetPlatform.windows) {
+      return const FirebaseOptions(
+        apiKey: "AIzaSyCz-BuekIrud7R-c6XegCWGJpx_WgP98QY",
+        appId: "1:149243887464:web:f5aae24352e930801b20dd",
+        messagingSenderId: "149243887464",
+        projectId: "diet-app-398cf",
+        storageBucket: "diet-app-398cf.firebasestorage.app", // (없으면 비워도 됨)
+      );
+    }
+    throw UnsupportedError('DefaultFirebaseOptions are not supported for this platform.');
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\firebase_options.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\main.dart ---
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart'; 
+import 'firebase_options.dart';
+import 'providers/user_provider.dart'; 
+import 'screens/survey_screen.dart'; 
+import 'screens/landing_screen.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Diet App',
+      theme: ThemeData(
+        // ... theme 설정
+      ),
+      home: const LandingScreen(), // [수정] SurveyScreen -> LandingScreen으로 변경
+    );
+  }
+  }
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\main.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\product.dart ---
+// lib/product.dart
+
+class Product {
+  final String id;
+  final String name;
+  final int price;
+  final String type; // meal_kit, bulk, ingredient
+  final String imageUrl;
+  final String purchaseUrl;
+  final int kcal;
+  final int protein;
+  final int cookingTime;
+  final int difficulty;
+
+  Product({
+    required this.id,
+    required this.name,
+    required this.price,
+    required this.type,
+    required this.imageUrl,
+    required this.purchaseUrl,
+    required this.kcal,
+    required this.protein,
+    required this.cookingTime,
+    required this.difficulty,
+  });
+
+  // JSON 데이터를 Dart 객체로 변환하는 생성자
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+      id: json['product_id'] ?? '',
+      name: json['name'] ?? '상품명 없음',
+      price: json['price'] ?? 0,
+      type: json['type'] ?? 'ingredient',
+      imageUrl: json['image_url'] ?? '',
+      purchaseUrl: json['purchase_url'] ?? '',
+      kcal: json['kcal'] ?? 0,
+      protein: json['protein'] ?? 0,
+      cookingTime: json['cooking_time'] ?? 0,
+      difficulty: json['difficulty'] ?? 0,
+    );
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\product.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\providers\user_provider.dart ---
+// lib/providers/user_provider.dart
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class UserProvider with ChangeNotifier {
+  String name = "";
+  String gender = "M";
+  String persona = "";
+  int point = 0;
+  
+  // 데이터가 있는지 확인하는 플래그
+  bool isInitialized = false; 
+
+  // [1] 정보 저장 (앱 껐다 켜도 유지되도록)
+  Future<void> saveUserInfo(String inputName, String inputGender, String inputPersona) async {
+    final prefs = await SharedPreferences.getInstance();
+    
+    // 변수 업데이트
+    name = inputName;
+    gender = inputGender;
+    persona = inputPersona;
+    isInitialized = true;
+
+    // 디스크에 저장
+    await prefs.setString('user_name', inputName);
+    await prefs.setString('user_gender', inputGender);
+    await prefs.setString('user_persona', inputPersona);
+    await prefs.setInt('user_point', point);
+    await prefs.setBool('is_setup_complete', true); // "가입 완료함" 도장 쾅!
+    
+    notifyListeners();
+  }
+
+  // [2] 정보 불러오기 (앱 켤 때 실행)
+  Future<bool> loadUserInfo() async {
+    final prefs = await SharedPreferences.getInstance();
+    
+    // 저장된 데이터가 없으면 false 반환
+    if (!prefs.containsKey('is_setup_complete')) {
+      return false; 
+    }
+
+    // 데이터 불러와서 변수에 넣기
+    name = prefs.getString('user_name') ?? "";
+    gender = prefs.getString('user_gender') ?? "M";
+    persona = prefs.getString('user_persona') ?? "";
+    point = prefs.getInt('user_point') ?? 0;
+    isInitialized = true;
+
+    notifyListeners();
+    return true; // 불러오기 성공
+  }
+
+  // [3] 로그아웃 (데이터 초기화 - 테스트용)
+  Future<void> clearUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear(); // 저장소 싹 비우기
+    name = "";
+    persona = "";
+    isInitialized = false;
+    notifyListeners();
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\providers\user_provider.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\recommendation_page.dart ---
+// lib/recommendation_page.dart
+
+import 'dart:convert';
+import 'dart:math'; // 랜덤 섞기용
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // json 파일 로드용
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart'; // 쿠팡 링크 연결용
+import 'product.dart';
+import 'providers/user_provider.dart';
+
+class RecommendationPage extends StatefulWidget {
+  const RecommendationPage({super.key});
+
+  @override
+  State<RecommendationPage> createState() => _RecommendationPageState();
+}
+
+class _RecommendationPageState extends State<RecommendationPage> {
+  String currentPersona = 'meal_kit'; // 기본값
+
+  List<Product> allProducts = [];
+  List<List<Product>> recommendedSets = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    
+    // 1. 앱 시작 시 내 페르소나 가져오기
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userPersona = context.read<UserProvider>().persona;
+      setState(() {
+        if (userPersona == "편의점 마스터" || userPersona == "배달음식 VIP") {
+          currentPersona = 'meal_kit';
+        } else if (userPersona == "알뜰한 요리사") {
+          currentPersona = 'bulk';
+        } else if (userPersona == "건강한 미식가") {
+          currentPersona = 'ingredient';
+        }
+        loadProductData();
+      });
+    });
+  }
+
+  // 2. 데이터 로드
+  Future<void> loadProductData() async {
+    try {
+      final String response = await rootBundle.loadString('assets/data/coupang_data.json');
+      final List<dynamic> data = json.decode(response);
+
+      setState(() {
+        allProducts = data.map((json) => Product.fromJson(json)).toList();
+        makeSets(); 
+        isLoading = false;
+      });
+    } catch (e) {
+      print("Error loading data: $e");
+      setState(() => isLoading = false);
+    }
+  }
+
+  // ★ [핵심 수정] 가격 안배를 고려한 세트 조합 알고리즘
+  void makeSets() {
+    // 1. 불량 데이터(0원) 제외
+    List<Product> validProducts = allProducts.where((p) => p.price > 0).toList();
+    List<Product> targetProducts = [];
+
+    // 2. 페르소나별 상품 풀(Pool) 확보
+    if (currentPersona == 'meal_kit') {
+      targetProducts = validProducts.where((p) => p.type == 'meal_kit').toList();
+    } else if (currentPersona == 'bulk') {
+      targetProducts = validProducts.where((p) => 
+          p.type == 'bulk' || (p.type == 'ingredient' && p.price <= 20000)
+      ).toList();
+    } else {
+      targetProducts = validProducts.where((p) => p.type == 'ingredient').toList();
+    }
+
+    // 3. 메인(비싼거)과 서브(싼거) 분리
+    // (기준: 15,000원 이상이면 메인, 아니면 서브)
+    List<Product> mains = targetProducts.where((p) => p.price >= 15000).toList();
+    List<Product> sides = targetProducts.where((p) => p.price < 15000).toList();
+
+    // 셔플 (매번 다르게)
+    mains.shuffle(Random());
+    sides.shuffle(Random());
+
+    // 4. 세트 조립: [메인 1개 + 서브 2개]
+    List<List<Product>> newSets = [];
+    
+    // 메인이 있는 만큼 세트를 만듦
+    for (var main in mains) {
+      if (sides.length >= 2) {
+        // 서브에서 2개 뽑기
+        Product side1 = sides.removeAt(0); // 뽑고 리스트에서 제거 (중복 방지)
+        Product side2 = sides.removeAt(0);
+        
+        newSets.add([main, side1, side2]);
+      } else {
+        break; // 서브가 부족하면 그만 만듦
+      }
+    }
+
+    // 만약 세트가 너무 적게 만들어졌으면(3개 미만), 남은 걸로라도 만듦
+    if (newSets.length < 2 && targetProducts.isNotEmpty) {
+       // 그냥 무작위로 3개씩 묶어서 추가 (fallback)
+       List<Product> leftovers = [...mains, ...sides]..shuffle();
+       for (int i = 0; i < leftovers.length; i += 3) {
+         if(i + 3 <= leftovers.length) newSets.add(leftovers.sublist(i, i+3));
+       }
+    }
+
+    setState(() {
+      recommendedSets = newSets;
+    });
+  }
+
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $uri');
+    }
+  }
+
+  // ★ [추가] 구매 링크 팝업 띄우기 (장바구니 대용)
+  void _showPurchaseDialog(List<Product> products) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.all(20),
+          height: 350,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("🛍️ 구매 링크 모음", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 10),
+              const Text("쿠팡 장바구니에 하나씩 담아주세요!", style: TextStyle(color: Colors.grey)),
+              const SizedBox(height: 20),
+              Expanded(
+                child: ListView.separated(
+                  itemCount: products.length,
+                  separatorBuilder: (_, __) => const Divider(),
+                  itemBuilder: (context, index) {
+                    final p = products[index];
+                    return ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: (p.imageUrl.isNotEmpty && !p.imageUrl.contains('placeholder'))
+                            ? Image.network(p.imageUrl, width: 50, height: 50, fit: BoxFit.cover)
+                            : Container(width: 50, height: 50, color: Colors.grey[200], child: const Icon(Icons.shopping_cart)),
+                      ),
+                      title: Text(p.name, maxLines: 1, overflow: TextOverflow.ellipsis),
+                      trailing: ElevatedButton(
+                        onPressed: () => _launchUrl(p.purchaseUrl),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue, 
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          minimumSize: const Size(60, 30)
+                        ),
+                        child: const Text("담기"),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  String getPersonaTitle() {
+    switch (currentPersona) {
+      case 'meal_kit': return '⏰ 시간 부족형';
+      case 'bulk': return '💰 절약형';
+      case 'ingredient': return '👨‍🍳 요리형';
+      default: return '맞춤 추천';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('AI 맞춤 식단 세트'),
+        backgroundColor: Colors.green,
+        foregroundColor: Colors.white,
+      ),
+      body: Column(
+        children: [
+          // 상단 페르소나 변경 버튼
+          Container(
+            padding: const EdgeInsets.all(10),
+            color: Colors.grey[100],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildTypeButton('시간부족', 'meal_kit'),
+                _buildTypeButton('절약형', 'bulk'),
+                _buildTypeButton('요리형', 'ingredient'),
+              ],
+            ),
+          ),
+
+          Expanded(
+            child: isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : recommendedSets.isEmpty
+                    ? const Center(child: Text("추천할 상품 조합이 부족합니다."))
+                    : ListView.builder(
+                        padding: const EdgeInsets.all(16),
+                        itemCount: recommendedSets.length,
+                        itemBuilder: (context, index) {
+                          final setProducts = recommendedSets[index];
+                          int setPrice = setProducts.fold(0, (sum, item) => sum + item.price);
+                          int setKcal = setProducts.fold(0, (sum, item) => sum + item.kcal);
+
+                          return _buildSetCard(index, setProducts, setPrice, setKcal);
+                        },
+                      ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSetCard(int index, List<Product> products, int totalPrice, int totalKcal) {
+    return Card(
+      elevation: 4,
+      margin: const EdgeInsets.only(bottom: 20),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 1. 세트 헤더
+          Container(
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: Colors.green[50],
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("주간 추천 세트 ${String.fromCharCode(65 + index)}", 
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 4),
+                    Text("총 ${products.length}개 상품 | 약 $totalKcal kcal", 
+                        style: TextStyle(color: Colors.grey[700], fontSize: 13)),
+                  ],
+                ),
+                Text(
+                  "₩${totalPrice.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},')}",
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green),
+                ),
+              ],
+            ),
+          ),
+
+          // 2. 상품 리스트
+          ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: products.length,
+            separatorBuilder: (_, __) => const Divider(height: 1),
+            itemBuilder: (context, i) {
+              final product = products[i];
+              return ListTile(
+                leading: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.grey[200],
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: (product.imageUrl.isEmpty || product.imageUrl.contains('placeholder'))
+                      ? const Icon(Icons.restaurant, color: Colors.grey)
+                      : Image.network(product.imageUrl, fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => const Icon(Icons.broken_image, color: Colors.grey)),
+                ),
+                title: Text(product.name, maxLines: 1, overflow: TextOverflow.ellipsis),
+                subtitle: Text("${product.price}원"),
+                trailing: const Icon(Icons.check_circle_outline, color: Colors.green),
+              );
+            },
+          ),
+
+          // 3. 구매 팝업 버튼 (수정됨)
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: ElevatedButton(
+              onPressed: () => _showPurchaseDialog(products), // 팝업 호출
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+                minimumSize: const Size(double.infinity, 45),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              ),
+              child: const Text("이 세트 구매하기 (링크 모음)"),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTypeButton(String title, String type) {
+    bool isSelected = currentPersona == type;
+    return InkWell(
+      onTap: () {
+        setState(() {
+          currentPersona = type;
+          makeSets();
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.green : Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.green),
+        ),
+        child: Text(title, style: TextStyle(color: isSelected ? Colors.white : Colors.green, fontWeight: FontWeight.bold)),
+      ),
+    );
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\recommendation_page.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\admin_data_screen.dart ---
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle, ByteData;
+import 'package:excel/excel.dart'; // 엑셀 패키지
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class AdminDataScreen extends StatefulWidget {
+  const AdminDataScreen({super.key});
+
+  @override
+  State<AdminDataScreen> createState() => _AdminDataScreenState();
+}
+
+class _AdminDataScreenState extends State<AdminDataScreen> {
+  String statusMessage = "대기 중... (엑셀 파일 준비됨)";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("엑셀 데이터 업로드")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(statusMessage, textAlign: TextAlign.center, style: const TextStyle(fontSize: 16)),
+            ),
+            ElevatedButton(
+              onPressed: _uploadExcelData,
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+              child: const Text("엑셀 읽어서 DB에 쏘기", style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _uploadExcelData() async {
+    setState(() => statusMessage = "엑셀 파일 읽는 중...");
+
+    try {
+      // 1. 엑셀 파일 로드 (파일명: food.xlsx)
+      final ByteData data = await rootBundle.load('assets/data/food.xlsx');
+      var bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      var excel = Excel.decodeBytes(bytes);
+
+      // 2. 첫 번째 시트 가져오기
+      final sheet = excel.tables[excel.tables.keys.first];
+      
+      if (sheet == null) {
+        setState(() => statusMessage = "시트를 찾을 수 없습니다.");
+        return;
+      }
+
+      final db = FirebaseFirestore.instance;
+      int count = 0;
+      int limit = 2000; // 2천개 제한
+
+      // 3. 한 줄씩 읽기 (첫 줄은 제목이니까 건너뜀)
+      // row[0]: A열, row[1]: B열 ... 엑셀 열 순서를 확인해야 합니다!
+      // ★ 중요: 엑셀 파일을 열어서 A, B, C... 열이 뭔지 보고 아래 인덱스 숫자를 고치세요.
+      
+      // (보통 식약처 엑셀 순서 예시)
+      // A(0): 번호, B(1): 식품코드, C(2): 식품명, ... Q(16): 에너지 ...
+      
+      // 정확성을 위해 엑셀 열 제목을 먼저 매핑하는 로직을 씁니다.
+      List<dynamic> headers = sheet.rows[0]; // 첫 줄(제목)
+      Map<String, int> headerMap = {};
+      
+      for (int i = 0; i < headers.length; i++) {
+        var value = headers[i]?.value.toString() ?? "";
+        headerMap[value] = i; // 예: "식품명": 2
+      }
+
+      // 필수 항목이 없으면 중단
+      if (!headerMap.containsKey("식품명") || !headerMap.containsKey("에너지(kcal)")) {
+         setState(() => statusMessage = "엑셀 헤더 이름을 찾을 수 없습니다.\n파일의 첫 줄을 확인하세요.");
+         return;
+      }
+
+      // 데이터 읽기 시작 (1번째 줄부터)
+      for (int i = 1; i < sheet.rows.length; i++) {
+        var row = sheet.rows[i];
+        
+        // 이름 가져오기
+        String foodName = _getVal(row, headerMap["식품명"]);
+        if (foodName.isEmpty) continue;
+
+        // 대표 이름 추출 (김밥_채소 -> 김밥) - 로직 유지
+        String mainName = foodName.split('_')[0]; 
+        
+        Map<String, dynamic> myFoodData = {
+          "name": foodName,
+          
+          // ★ 엑셀의 한글 제목과 정확히 일치해야 합니다! (띄어쓰기, 괄호 주의)
+          "kcal": _parseNum(_getVal(row, headerMap["에너지(kcal)"])),
+          "protein": _parseNum(_getVal(row, headerMap["단백질(g)"])),
+          "fat": _parseNum(_getVal(row, headerMap["지방(g)"])),
+          "carbo": _parseNum(_getVal(row, headerMap["탄수화물(g)"])),
+          
+          "calcium": _parseNum(_getVal(row, headerMap["칼슘(mg)"])),
+          "sodium": _parseNum(_getVal(row, headerMap["나트륨(mg)"])),
+          
+          // 비타민 C (엑셀 파일 열어서 제목 확인 필수! 보통 '비타민 C(mg)' 임)
+          "vit_c": _parseNum(_getVal(row, headerMap["비타민 C(mg)"])),
+
+          // 엑셀 헤더 이름이 정확해야 합니다!
+          "cholesterol": _parseNum(_getVal(row, headerMap["콜레스테롤(mg)"])),
+          "saturated_fat": _parseNum(_getVal(row, headerMap["포화지방산(g)"])), 
+          "trans_fat": _parseNum(_getVal(row, headerMap["트랜스지방산(g)"])),
+          
+          "category": "일반",
+        };
+
+        // ID에 /가 있으면 에러나므로 _로 치환
+        String docId = foodName.replaceAll("/", "_");
+        
+        await db.collection('foods').doc(docId).set(myFoodData);
+        count++;
+
+        if (count % 100 == 0) setState(() => statusMessage = "$count개 처리 중...");
+        if (count >= limit) break;
+      }
+
+      setState(() => statusMessage = "완료! 총 $count개 등록됨.");
+
+    } catch (e) {
+      setState(() => statusMessage = "에러: $e");
+      print(e);
+    }
+  }
+
+  // 엑셀 셀 값 가져오는 헬퍼 함수
+  String _getVal(List<Data?> row, int? index) {
+    if (index == null || index >= row.length) return "";
+    return row[index]?.value.toString() ?? "";
+  }
+
+  double _parseNum(String val) {
+    if (val == "" || val == "null") return 0.0;
+    return double.tryParse(val) ?? 0.0;
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\admin_data_screen.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\character_creation_screen.dart ---
+// lib/screens/character_creation_screen.dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../providers/user_provider.dart';
+import 'main_screen.dart';
+
+class CharacterCreationScreen extends StatefulWidget {
+  final String persona; // 설문조사에서 넘어온 페르소나 결과
+
+  const CharacterCreationScreen({super.key, required this.persona});
+
+  @override
+  State<CharacterCreationScreen> createState() => _CharacterCreationScreenState();
+}
+
+class _CharacterCreationScreenState extends State<CharacterCreationScreen> {
+  final TextEditingController _nameController = TextEditingController();
+  String _selectedGender = "M"; // 기본값 남자
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("캐릭터 생성")),
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text("반가워요! 👋\n당신의 캐릭터를 만들어볼까요?", 
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 40),
+            
+            // 1. 이름 입력
+            const Align(alignment: Alignment.centerLeft, child: Text("이름", style: TextStyle(fontWeight: FontWeight.bold))),
+            const SizedBox(height: 10),
+            TextField(
+              controller: _nameController,
+              decoration: InputDecoration(
+                hintText: "캐릭터 닉네임을 입력하세요",
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                filled: true,
+                fillColor: Colors.grey[100],
+              ),
+            ),
+            const SizedBox(height: 30),
+
+            // 2. 성별 선택
+            const Align(alignment: Alignment.centerLeft, child: Text("성별", style: TextStyle(fontWeight: FontWeight.bold))),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildGenderCard("남자", "M", Icons.face),
+                _buildGenderCard("여자", "F", Icons.face_3),
+              ],
+            ),
+            
+            const Spacer(),
+
+            // 3. 생성 버튼
+            SizedBox(
+              width: double.infinity,
+              height: 55,
+              child: ElevatedButton(
+                onPressed: _createCharacter,
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
+                child: const Text("시작하기", style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // 성별 선택 카드 디자인
+  Widget _buildGenderCard(String label, String genderCode, IconData icon) {
+    bool isSelected = _selectedGender == genderCode;
+    return GestureDetector(
+      onTap: () => setState(() => _selectedGender = genderCode),
+      child: Container(
+        width: 140,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.blue[50] : Colors.white,
+          border: Border.all(color: isSelected ? Colors.blue : Colors.grey[300]!, width: 2),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Column(
+          children: [
+            Icon(icon, size: 50, color: isSelected ? Colors.blue : Colors.grey),
+            const SizedBox(height: 10),
+            Text(label, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: isSelected ? Colors.blue : Colors.black)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // 생성 완료 로직
+  Future<void> _createCharacter() async {
+    final name = _nameController.text.trim();
+    if (name.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("이름을 입력해주세요!")));
+      return;
+    }
+
+    // 1. 앱 내 저장소(Provider)에 저장
+    context.read<UserProvider>().saveUserInfo(name, _selectedGender, widget.persona);
+
+    // 2. Firebase DB에 저장
+    await FirebaseFirestore.instance.collection('users').add({
+      'name': name,
+      'gender': _selectedGender,
+      'persona': widget.persona,
+      'createdAt': DateTime.now(),
+      'point': 0,
+    });
+
+    // 3. 메인 화면으로 이동 (뒤로가기 못하게 pushReplacement)
+    if (!mounted) return;
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainScreen()));
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\character_creation_screen.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\diet_tab.dart ---
+import 'package:flutter/material.dart';
+
+class DietTab extends StatelessWidget {
+  const DietTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          "식단 기록 화면\n(추후 개발 예정)",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 20, color: Colors.grey),
+        ),
+      ),
+    );
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\diet_tab.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\friend_tab.dart ---
+import 'package:flutter/material.dart';
+
+class FriendTab extends StatelessWidget {
+  const FriendTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          "친구 목록 화면\n(추후 개발 예정)",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 20, color: Colors.grey),
+        ),
+      ),
+    );
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\friend_tab.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\home_tab.dart ---
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/user_provider.dart';
+
+class HomeTab extends StatefulWidget {
+  const HomeTab({super.key});
+
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  // 건강 상태 데이터 (추후에는 이것도 Firebase나 Provider에서 가져와야 함)
+  double healthScore = 40; // 0~100 (낮으면 아픔)
+  double diabetesRisk = 0.8; // 당뇨 위험도 (0.0 ~ 1.0)
+  double hbpRisk = 0.3; // 고혈압 위험도
+
+  @override
+  Widget build(BuildContext context) {
+    // ★ [핵심] Provider에 있는 내 정보 가져오기 (이름, 성별, 포인트 등)
+    // context.watch를 쓰면 데이터가 바뀔 때마다 화면이 새로고침 됩니다.
+    final user = context.watch<UserProvider>();
+
+    return Scaffold(
+      // 상단 앱바 (포인트 표시용)
+      appBar: AppBar(
+        title: const Text("내 캐릭터"),
+        actions: [
+          Center(
+            child: Container(
+              margin: const EdgeInsets.only(right: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: Colors.amber[100],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.cookie, color: Colors.brown, size: 20),
+                  const SizedBox(width: 5),
+                  // ★ [수정] 내 진짜 포인트 보여주기
+                  Text(
+                    "${user.point} P", 
+                    style: const TextStyle(color: Colors.brown, fontWeight: FontWeight.bold)
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            // 1. 캐릭터 영역
+            Expanded(
+              flex: 3,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // ★ [수정] 성별과 건강 상태에 따라 다른 이미지 보여주는 함수 호출
+                    _buildCharacterImage(user.gender, healthScore),
+                    
+                    const SizedBox(height: 20),
+                    
+                    // ★ [추가] 이름과 페르소나(유형) 표시
+                    Text(
+                      user.name.isEmpty ? "이름없음" : user.name,
+                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "(${user.persona})", 
+                      style: const TextStyle(fontSize: 16, color: Colors.grey),
+                    ),
+                    
+                    const SizedBox(height: 20),
+                    
+                    // 말풍선 (상태 메시지)
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text(
+                        healthScore < 50 ? "배고파요... 밥 좀 주세요..." : "오늘 컨디션 최고!",
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // 2. 건강 위험도 UI (당뇨, 고혈압)
+            Expanded(
+              flex: 2,
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 10)],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("⚠️ 건강 위험 경보", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 20),
+                    _buildRiskBar("당뇨 위험", diabetesRisk, Colors.orange),
+                    const SizedBox(height: 15),
+                    _buildRiskBar("고혈압 위험", hbpRisk, Colors.red),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // ★ [추가] 캐릭터 이미지 분기 처리 함수
+  Widget _buildCharacterImage(String gender, double health) {
+    IconData charIcon;
+    Color color;
+
+    if (health < 50) {
+      // 건강 점수가 낮으면 아픈 아이콘 (성별 무관)
+      charIcon = Icons.sick;
+      color = Colors.green; // 아픈 색깔
+    } else {
+      // 건강하면 성별에 따라 다르게
+      if (gender == 'M') {
+        charIcon = Icons.face; // 남자
+        color = Colors.blue;
+      } else {
+        charIcon = Icons.face_3; // 여자
+        color = Colors.pink;
+      }
+    }
+
+    return Icon(charIcon, size: 150, color: color);
+  }
+
+  // 위험도 게이지 바 만드는 함수 (기존 유지)
+  Widget _buildRiskBar(String label, double value, Color color) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text("${(value * 100).toInt()}%", style: TextStyle(color: color, fontWeight: FontWeight.bold)),
+          ],
+        ),
+        const SizedBox(height: 8),
+        LinearProgressIndicator(
+          value: value, // 0.0 ~ 1.0
+          backgroundColor: Colors.grey[300],
+          color: color,
+          minHeight: 10,
+          borderRadius: BorderRadius.circular(5),
+        ),
+      ],
+    );
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\home_tab.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\landing_screen.dart ---
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/user_provider.dart';
+import 'survey_screen.dart';
+import 'main_screen.dart';
+
+class LandingScreen extends StatefulWidget {
+  const LandingScreen({super.key});
+
+  @override
+  State<LandingScreen> createState() => _LandingScreenState();
+}
+
+class _LandingScreenState extends State<LandingScreen> {
+  bool _isLoading = true;
+  bool _hasUser = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkUser();
+  }
+
+  // 저장된 유저가 있는지 확인
+  Future<void> _checkUser() async {
+    // Provider의 불러오기 함수 실행
+    bool exists = await context.read<UserProvider>().loadUserInfo();
+    
+    if (mounted) {
+      setState(() {
+        _hasUser = exists;
+        _isLoading = false;
+      });
+      
+      // (선택) 만약 유저가 있으면 바로 메인으로 보내고 싶다면 아래 주석 해제
+      // if (exists) Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const MainScreen()));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
+    return Scaffold(
+      backgroundColor: Colors.green[50], // 산뜻한 배경색
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // 로고 대신 아이콘
+              const Icon(Icons.restaurant_menu, size: 100, color: Colors.green),
+              const SizedBox(height: 20),
+              const Text(
+                "COOK-KEY",
+                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.green),
+              ),
+              const Text("자취생을 위한 스마트 식단 매니저", style: TextStyle(color: Colors.grey)),
+              const SizedBox(height: 60),
+
+              // [분기점] 유저 정보가 있으면 '이어하기', 없으면 '시작하기'
+              if (_hasUser) ...[
+                Text(
+                  "${context.watch<UserProvider>().name}님, 환영합니다!",
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context, 
+                      MaterialPageRoute(builder: (context) => const MainScreen())
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size(double.infinity, 55),
+                    textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  child: const Text("메인으로 입장하기"),
+                ),
+                const SizedBox(height: 10),
+                TextButton(
+                  onPressed: () async {
+                    await context.read<UserProvider>().clearUser(); // 초기화
+                    setState(() => _hasUser = false); // 화면 갱신
+                  },
+                  child: const Text("데이터 초기화하고 다시 시작하기 (테스트용)", style: TextStyle(color: Colors.grey)),
+                ),
+              ] else ...[
+                // 유저 정보가 없을 때
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => const SurveyScreen())
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size(double.infinity, 55),
+                    textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  child: const Text("자가진단 시작하기"),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\landing_screen.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\main_screen.dart ---
+import 'package:flutter/material.dart';
+import 'home_tab.dart';
+import 'diet_tab.dart'; 
+import 'shop_tab.dart'; 
+import 'friend_tab.dart'; 
+
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int _selectedIndex = 0; // 현재 선택된 탭 번호 (0: 홈)
+
+  // 탭별 화면 리스트
+  final List<Widget> _tabs = [
+    const HomeTab(),   // 1. 홈 (캐릭터)
+    const DietTab(),   // 2. 식단
+    const ShopTab(),   // 3. 상점
+    const FriendTab(), // 4. 친구
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // 선택된 화면 보여주기
+      body: _tabs[_selectedIndex], 
+      
+      // 하단 네비게이션 바
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed, // 탭이 4개 이상일 때 필수
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        selectedItemColor: Colors.blue, // 선택된 아이콘 색
+        unselectedItemColor: Colors.grey, // 안 선택된 아이콘 색
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
+          BottomNavigationBarItem(icon: Icon(Icons.rice_bowl), label: '식단'),
+          BottomNavigationBarItem(icon: Icon(Icons.store), label: '상점'),
+          BottomNavigationBarItem(icon: Icon(Icons.people), label: '친구'),
+        ],
+      ),
+    );
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\main_screen.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\shop_tab.dart ---
+import 'package:flutter/material.dart';
+import '../recommendation_page.dart'; // <-- 우리가 만든 추천 페이지 불러오기
+
+class ShopTab extends StatelessWidget {
+  const ShopTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // 껍데기(ShopTab)는 그대로 두고, 알맹이(RecommendationPage)만 보여줍니다.
+    return const RecommendationPage();
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\shop_tab.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\survey_screen.dart ---
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'character_creation_screen.dart'; // 캐릭터 생성 화면으로 연결
+
+class SurveyScreen extends StatefulWidget {
+  const SurveyScreen({super.key});
+
+  @override
+  State<SurveyScreen> createState() => _SurveyScreenState();
+}
+
+class _SurveyScreenState extends State<SurveyScreen> {
+  // 질문 1: 요리할 시간이 있나요?
+  bool hasTime = false;
+  // 질문 2: 한 끼 예산이 5천원 넘나요?
+  bool hasMoney = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("나만의 식습관 찾기")),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text("Q1. 평소 요리할 시간이 충분한가요?",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                _buildOption("네, 여유로워요", true, hasTime, (v) => setState(() => hasTime = v)),
+                const SizedBox(width: 10),
+                _buildOption("아니요, 바빠요", false, hasTime, (v) => setState(() => hasTime = v)),
+              ],
+            ),
+            const SizedBox(height: 30),
+            const Text("Q2. 한 끼 식사 예산은 어느 정도인가요?",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                _buildOption("5천원 이상", true, hasMoney, (v) => setState(() => hasMoney = v)),
+                const SizedBox(width: 10),
+                _buildOption("5천원 미만 (절약)", false, hasMoney, (v) => setState(() => hasMoney = v)),
+              ],
+            ),
+            const Spacer(),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  _analyzePersona();
+                },
+                child: const Text("결과 분석하기", style: TextStyle(fontSize: 18)),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOption(String text, bool value, bool groupValue, Function(bool) onTap) {
+    bool isSelected = (value == groupValue);
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => onTap(value),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          decoration: BoxDecoration(
+            color: isSelected ? Colors.blue : Colors.grey[200],
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: isSelected ? Colors.blue : Colors.grey),
+          ),
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(
+                color: isSelected ? Colors.white : Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _analyzePersona() async {
+    String result = "";
+    if (hasTime && hasMoney) result = "건강한 미식가";
+    else if (hasTime && !hasMoney) result = "알뜰한 요리사";
+    else if (!hasTime && hasMoney) result = "배달음식 VIP";
+    else result = "편의점 마스터";
+
+    // 팝업으로 결과 보여주고 -> 캐릭터 생성 화면으로 이동
+    if (!mounted) return;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("분석 완료!"),
+        content: Text("당신은 [$result] 입니다!", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // 팝업 닫기
+              
+              // 캐릭터 생성 화면으로 이동 (페르소나 전달)
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CharacterCreationScreen(persona: result),
+                ),
+              );
+            },
+            child: const Text("캐릭터 만들러 가기"),
+          )
+        ],
+      ),
+    );
+  }
+}
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\lib\screens\survey_screen.dart ---
+
+
+--- START OF FILE: C:\Users\jemin\Desktop\DIET-APP\pubspec.yaml ---
+name: diet_app
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.1
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+  provider: ^6.1.1
+  intl: ^0.19.0
+  image_picker: ^1.0.7
+  excel: ^4.0.0
+  # -----------------------
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
+  url_launcher: ^6.3.2
+  shared_preferences: ^2.5.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^6.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+    - assets/data/
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/to/resolution-aware-images
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/to/asset-from-package
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package
+
+--- END OF FILE: C:\Users\jemin\Desktop\DIET-APP\pubspec.yaml ---
+

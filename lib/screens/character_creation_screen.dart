@@ -108,7 +108,7 @@ class _CharacterCreationScreenState extends State<CharacterCreationScreen> {
     }
 
     // 1. 앱 내 저장소(Provider)에 저장
-    context.read<UserProvider>().setUserInfo(name, _selectedGender, widget.persona);
+    context.read<UserProvider>().saveUserInfo(name, _selectedGender, widget.persona);
 
     // 2. Firebase DB에 저장
     await FirebaseFirestore.instance.collection('users').add({

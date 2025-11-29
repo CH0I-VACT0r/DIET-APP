@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'providers/user_provider.dart'; 
 import 'screens/survey_screen.dart'; 
+import 'screens/landing_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,18 +24,15 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Diet App',
       theme: ThemeData(
-        primarySwatch: Colors.blue, 
-        fontFamily: 'Pretendard'
+        // ... theme 설정
       ),
-      
-      // ★ [수정] const 제거 (이게 에러 원인 중 하나였습니다)
-      home: SurveyScreen(), 
+      home: const LandingScreen(), // [수정] SurveyScreen -> LandingScreen으로 변경
     );
   }
-}
+  }
