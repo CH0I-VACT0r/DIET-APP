@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import '../providers/user_provider.dart';
 import 'wardrobe_screen.dart';
+import 'landing_screen.dart'; // ★ 로그아웃 후 이동할 화면 import
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -28,7 +29,14 @@ class _HomeTabState extends State<HomeTab> {
 
     return Scaffold(
       appBar: AppBar(
+        // ★ [추가] 로그아웃/초기화 버튼 (왼쪽 상단)
+        leading: IconButton(
+          icon: const Icon(Icons.logout, color: Colors.grey),
+          onPressed: () => _showLogoutDialog(context),
+          tooltip: "초기화 및 로그아웃",
+        ),
         title: const Text("내 캐릭터"),
+        centerTitle: true,
         actions: [
           _buildPointBadge(user.point),
         ],
@@ -47,9 +55,9 @@ class _HomeTabState extends State<HomeTab> {
           Map<String, double> nutrientSum = {
             'sodium': 0, 'carbo': 0, 'trans_fat': 0, 'kcal': 0, 'fat': 0
           };
+          bool hadBreakfast = false;
           bool hadLunch = false;
           bool hadDinner = false;
-          bool hadBreakfast = false; // 아침 추가
 
           for (var doc in docs) {
             var data = doc.data() as Map<String, dynamic>;
@@ -74,9 +82,12 @@ class _HomeTabState extends State<HomeTab> {
           if (nutrientSum['sodium']! > limitSodium) {
             charState = "sick";
             stateMessage = "으악! 너무 짜게 먹었어요... 몸이 부었어요 🤢";
-          } else if (nutrientSum['fat']! > limitFat || nutrientSum['trans_fat']! > limitTransFat) {
-            charState = "obese";
-            stateMessage = "기름진 음식을 너무 많이 먹었어요... 몸이 무거워요 🐷";
+          } else if (nutrientSum['trans_fat']! > limitTransFat) {
+            charState = "sick";
+            stateMessage = "기름진 음식 그만! 혈관이 아파요 🚑";
+          } else if (nutrientSum['fat']! > limitFat) {
+             charState = "obese";
+             stateMessage = "기름진 음식을 너무 많이 먹었어요... 몸이 무거워요 🐷";
           } else if (
             (hour >= 10 && !hadBreakfast) || 
             (hour >= 13 && !hadLunch) ||     
@@ -94,11 +105,10 @@ class _HomeTabState extends State<HomeTab> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                // 1. 캐릭터 영역 (스크롤 가능하도록 수정)
+                // 1. 캐릭터 영역
                 Expanded(
                   flex: 3,
                   child: Center(
-                    // ★ [수정] SingleChildScrollView로 감싸서 오버플로우 방지
                     child: SingleChildScrollView(
                       child: SizedBox(
                         width: 340, 
@@ -159,7 +169,7 @@ class _HomeTabState extends State<HomeTab> {
                   ),
                 ),
 
-                // 2. 위험도 UI (기존 유지)
+                // 2. 위험도 UI
                 Expanded(
                   flex: 2,
                   child: Container(
@@ -197,6 +207,42 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
+  // ★ [추가] 로그아웃 확인 팝업
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("초기화 하시겠습니까?"),
+        content: const Text("현재 캐릭터와 포인트 정보가 기기에서 삭제되고,\n첫 화면으로 돌아갑니다."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context), // 취소
+            child: const Text("취소"),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(context); // 팝업 닫기
+              
+              // 1. 유저 정보 초기화
+              await context.read<UserProvider>().clearUser();
+              
+              // 2. 첫 화면(LandingScreen)으로 이동하면서 기존 화면 스택 모두 제거
+              if (mounted) {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LandingScreen()),
+                  (route) => false, // 뒤로가기 불가능하게 만듦
+                );
+              }
+            },
+            child: const Text("초기화", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ... (아래 위젯들은 기존과 동일) ...
   Widget _buildRealCharacterImage(String gender, String state) {
     String genderPrefix = (gender == 'M') ? 'male' : 'female';
     String imagePath = 'assets/images/${genderPrefix}_$state.png';
